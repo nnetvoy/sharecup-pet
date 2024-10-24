@@ -1,0 +1,9 @@
+<div class="flex flex-nowrap justify-between py-2">
+  <a routerLink="/" class="text-white text-2xl h-10 w-[120px] relative">
+    <img class="object-contain absolute" ngSrc="assets/cup-logo.png" alt="" fill>
+  </a>
+
+  @if (user.user$ | async) {
+    <button tuiButton size="s" (click)="logout()">Выйти</button>
+  }
+</div>

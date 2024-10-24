@@ -1,0 +1,85 @@
+<form [formGroup]="registerForm" class="border border-solid border-white rounded-xl p-4 flex flex-col min-w-[350px]">
+  <h1 class="text-white mb-3 text-3xl">Регистрация аккаунта </h1>
+  <tui-input class="mb-2" formControlName="firstName">
+    Введите имя
+    <input
+      tuiTextfield
+      type="text"
+    />
+  </tui-input>
+  <tui-input class="mb-2" formControlName="lastName">
+    Введите фамилию
+    <input
+      tuiTextfield
+      type="text"
+    />
+  </tui-input>
+  <tui-input class="mb-2" formControlName="email">
+    Введите email
+    <input
+      tuiTextfield
+      type="email"
+    />
+  </tui-input>
+  <tui-input-password
+    formControlName="password"
+    class="mb-2"
+  >
+    Введите пароль
+    <input
+      tuiTextfield
+    />
+  </tui-input-password>
+
+  <div class="flex flex-nowrap gap-2 items-center justify-between mb-2">
+    <p class="text-white text-base mb-1">Я предприниматель или компания</p>
+    <tui-toggle
+      formControlName="company"
+    ></tui-toggle>
+  </div>
+
+  @if (registerForm.controls['company'].value) {
+    <tui-input class="mb-2" formControlName="companyInn">
+      ИНН
+      <input
+        tuiTextfield
+        type="text"
+      />
+    </tui-input>
+    <tui-input class="mb-2" formControlName="companyOgrn">
+      ОГРН / ОГРНИП
+      <input
+        tuiTextfield
+        type="text"
+      />
+    </tui-input>
+    <tui-input class="mb-2" formControlName="companyKpp">
+      КПП
+      <input
+        tuiTextfield
+        type="text"
+      />
+    </tui-input>
+    <tui-input class="mb-2" formControlName="companyAddress">
+      Адрес компании
+      <input
+        tuiTextfield
+        type="text"
+      />
+    </tui-input>
+    <tui-input class="mb-2" formControlName="companyName">
+     Название компании
+      <input
+        tuiTextfield
+        type="text"
+      />
+    </tui-input>
+  }
+
+  <button tuiButton size="m" [showLoader]="loading" [disabled]="registerForm.invalid" (click)="register()">Зарегистрироваться</button>
+
+
+  @if (error) {
+    <p class="text-base text-red-800 text-center mt-2">{{error}}</p>
+  }
+</form>

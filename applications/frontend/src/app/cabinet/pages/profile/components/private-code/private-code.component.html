@@ -1,0 +1,36 @@
+<div class="border border-solid border-white rounded-xl p-4 mt-2 mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+  <div class="text-2xl">Взять или сдать стакан</div>
+  <button appearance="primary" tuiButton type="button" size="m" [showLoader]="loading" (click)="createNewKey()">
+    @if (key) {
+      Получить новый код
+    } @else {
+      Получить код
+    }
+  </button>
+</div>
+
+
+@if (key) {
+  <div class="grid grid-cols-1 sm:grid-cols-[300px_1fr] gap-6">
+    <div class="border border-solid border-white rounded-xl p-4 flex justify-center items-center">
+      <ngx-barcode6
+        [bc-format]="'MSI'"
+        [bc-value]="key"
+        [bc-display-value]="true"
+      >
+      </ngx-barcode6>
+    </div>
+    <div class="border border-solid border-white rounded-xl p-4 flex flex-col justify-center items-center">
+      <div class="text-xl">Ваш код для баристы</div>
+      <div class="text-5xl mb-1">{{ key }}</div>
+      <div class="text-base text-center">
+        действует до получения/сдачи стакана
+        @if (keyExpires) {
+          или до {{ keyExpires | date: 'HH:mm' }}
+        }
+      </div>
+    </div>
+  </div>
+}
+
+

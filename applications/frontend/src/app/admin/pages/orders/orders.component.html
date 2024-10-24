@@ -1,0 +1,27 @@
+<div class="flex flex-col">
+  <div class="text-2xl border-b border-solid border-white text-center leading-10 mb-2">Заказы / отгрузки </div>
+
+  @if (loading) {
+    <tui-loader></tui-loader>
+  } @else {
+    @for (value of changes; track value._id) {
+      <div class="grid grid-cols-[auto_1fr_1fr_auto] gap-4 justify-between mx-2 text-xl">
+
+        @switch (value.type) {
+          @case ('order') {
+            <div class="text-green-500">Заказано</div>
+          }
+          @case ('return') {
+            <div class="text-red-600">Отгружено</div>
+          }
+        }
+
+        <span class="text-white"> {{ value.user.companyName }} </span>
+
+        <span class="text-white"> {{ value.user.companyAddress }} </span>
+
+        <div class="text-white">{{ value.amount }} шт.</div>
+      </div>
+    }
+  }
+</div>

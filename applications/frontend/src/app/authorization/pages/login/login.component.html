@@ -1,0 +1,26 @@
+<form [formGroup]="loginForm" class="border border-solid border-white rounded-xl p-4 flex flex-col min-w-[350px]">
+  <h1 class="text-white mb-3 text-3xl">Вход в аккаунт</h1>
+  <tui-input class="mb-2" formControlName="email">
+    Введите email
+    <input
+      tuiTextfield
+      type="email"
+    />
+  </tui-input>
+  <tui-input-password
+    formControlName="password"
+    class="mb-2"
+  >
+    Введите пароль
+    <input
+      placeholder="Make it secure!"
+      tuiTextfield
+    />
+  </tui-input-password>
+
+  <button tuiButton size="m" [showLoader]="loading" [disabled]="loginForm.invalid" (click)="login()">Войти</button>
+
+  @if (error) {
+    <p class="text-base text-red-800 text-center mt-2">{{error}}</p>
+  }
+</form>

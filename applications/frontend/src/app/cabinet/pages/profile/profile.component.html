@@ -1,0 +1,11 @@
+@if (user.user$ | async; as userData) {
+  <app-personal-data [user]="userData"></app-personal-data>
+  <app-current-subscription></app-current-subscription>
+  @if (subscription.subscription$ | async) {
+    @if (userData.company) {
+      <app-company-cups [id]="userData._id"></app-company-cups>
+    } @else {
+      <app-private-code [id]="userData._id"></app-private-code>
+    }
+  }
+}

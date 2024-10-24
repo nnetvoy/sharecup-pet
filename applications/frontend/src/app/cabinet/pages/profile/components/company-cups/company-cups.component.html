@@ -1,0 +1,105 @@
+<div class="grid grid-cols-2 gap-4 mb-4">
+    <div class="flex flex-col border border-solid border-white rounded-xl pb-2">
+      <div class="text-2xl border-b border-solid border-white text-center leading-10">Передать стакан клиенту</div>
+      <tui-input class="mb-2 px-2 mt-2" [formControl]="giveUserCupControl">
+        Введите код клиента
+        <input tuiTextfield type="number"/>
+      </tui-input>
+      <button appearance="primary" tuiButton type="button" size="m" class="mx-2" (click)="giveUserCup()" [showLoader]="loadingGiveUserCup" [disabled]="giveUserCupControl.invalid">
+        Передать
+      </button>
+      @if (errorGiveUserCup) {
+        <p class="text-base text-red-800 text-center mt-2">{{errorGiveUserCup}}</p>
+      }
+      @if (successGiveUserCup) {
+        <p class="text-base text-green-800 text-center mt-2">{{successGiveUserCup}}</p>
+      }
+    </div>
+
+    <div class="border border-solid border-white rounded-xl flex flex-col pb-2">
+      <div class="text-2xl border-b border-solid border-white text-center leading-10">Забрать стакан у клиента</div>
+      <tui-input class="mb-2 px-2 mt-2" [formControl]="takeUserCupControl">
+        Введите код клиента
+        <input tuiTextfield type="number" />
+      </tui-input>
+
+      <button appearance="primary" tuiButton type="button" size="m" class="mx-2" (click)="takeUserCup()" [showLoader]="loadingTakeUserCup" [disabled]="takeUserCupControl.invalid">
+        Забрать
+      </button>
+      @if (errorTakeUserCup) {
+        <p class="text-base text-red-800 text-center mt-2">{{errorTakeUserCup}}</p>
+      }
+
+      @if (successTakeUserCup) {
+        <p class="text-base text-green-800 text-center mt-2">{{successTakeUserCup}}</p>
+      }
+    </div>
+</div>
+
+
+
+<div class="grid grid-cols-[350px_1fr] gap-4">
+  <div class="flex flex-col">
+    <div class="flex flex-col border border-solid border-white rounded-xl mb-2 pb-2">
+      <div class="text-2xl border-b border-solid border-white text-center leading-10">Заказать стаканы</div>
+      <tui-input class="mb-2 px-2 mt-2" [formControl]="orderCupControl">
+        Введите кол-во стаканов
+        <input tuiTextfield type="number"/>
+      </tui-input>
+      <button appearance="primary" tuiButton type="button" size="m" class="mx-2" [showLoader]="loadingOrderCup" [disabled]="orderCupControl.invalid" (click)="orderCups()">
+        Заказать
+      </button>
+      @if (errorOrderCup) {
+        <p class="text-base text-red-800 text-center mt-2">{{errorOrderCup}}</p>
+      }
+
+      @if (successOrderCup) {
+        <p class="text-base text-green-800 text-center mt-2">{{successOrderCup}}</p>
+      }
+    </div>
+
+    <div class="border border-solid border-white rounded-xl flex flex-col pb-2">
+      <div class="text-2xl border-b border-solid border-white text-center leading-10">Отгрузить стаканы</div>
+      <tui-input class="mb-2 px-2 mt-2" [formControl]="returnCupControl">
+        Введите кол-во стаканов
+        <input tuiTextfield type="number"/>
+      </tui-input>
+
+      <button appearance="primary" tuiButton type="button" size="m" class="mx-2" [showLoader]="loadingReturnCup" [disabled]="returnCupControl.invalid" (click)="returnCups()">
+        Отгрузить
+      </button>
+      @if (errorReturnCup) {
+        <p class="text-base text-red-800 text-center mt-2">{{errorReturnCup}}</p>
+      }
+
+      @if (successReturnCup) {
+        <p class="text-base text-green-800 text-center mt-2">{{successReturnCup}}</p>
+      }
+    </div>
+
+  </div>
+  <div class="flex flex-col border border-solid border-white rounded-xl">
+    <div class="text-2xl border-b border-solid border-white text-center leading-10 mb-2">История заказов / отгрузок </div>
+
+    @if (loadingStatistic) {
+      <tui-loader></tui-loader>
+    } @else {
+      @for (value of statistic; track value._id) {
+        <div class="flex flex-nowrap justify-between mx-2 text-xl">
+          @switch (value.type) {
+            @case ('order') {
+              <div class="text-green-500">Заказано</div>
+            }
+            @case ('return') {
+              <div class="text-red-600">Отгружено</div>
+            }
+          }
+          <div class="text-white">{{ value.amount }} шт.</div>
+        </div>
+      }
+
+    }
+
+
+  </div>
+</div>

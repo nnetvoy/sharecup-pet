@@ -1,0 +1,54 @@
+<div class="min-h-screen w-full relative flex flex-col gap-6 items-center justify-center">
+  <h1 class="text-3xl text-white uppercase"> Доступные варианты подписки </h1>
+  @if (userService.user$ | async; as userData) {
+    @if (userData.company) {
+      <h1 class="text-3xl text-white uppercase"> Для бизнеса </h1>
+      <div class="flex flex-nowrap gap-6">
+        <div class="rounded-xl p-4 border border-white border-solid w-[300px] overflow-hidden">
+          <div class="text-2xl border-b border-solid border-white text-center leading-10 mb-2 pb-4 py-4 -my-4 -mx-4 bg-gradient-to-r from-cyan-500 to-blue-500"> Базовая </div>
+          <p class="text-base">
+            Месячная подписка за 5000 рублей или годовая за 50000 рублей (2 месяца бесплатно)
+            <br>
+            Доступно 200 стаканов.
+          </p>
+          <button tuiButton size="m" class="w-full mt-2" [showLoader]="loading === 'companyBaseMonth'" (click)="setSubscription('companyBase', 'month')"> Подключить на месяц </button>
+          <button tuiButton size="m" class="w-full mt-2" [showLoader]="loading === 'companyBaseYear'" (click)="setSubscription('companyBase', 'year')"> Подключить на год </button>
+        </div>
+        <div class="rounded-xl p-4 border border-white border-solid w-[300px] overflow-hidden">
+          <div class="text-2xl border-b border-solid border-white text-center leading-10 mb-2 pb-4 py-4 -my-4 -mx-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"> Премиум </div>
+          <p class="text-base">
+            Месячная подписка за 7000 рублей или годовая за 70000 рублей (2 месяца бесплатно),
+            включает приоритетное обслуживание и доступ к эксклюзивным предложениям.
+            <br>
+            Доступно 600 стаканов.
+          </p>
+          <button tuiButton size="m" class="w-full mt-2" [showLoader]="loading === 'companyPremiumMonth'" (click)="setSubscription('companyPremium', 'month')"> Подключить на месяц </button>
+          <button tuiButton size="m" class="w-full mt-2" [showLoader]="loading === 'companyPremiumYear'" (click)="setSubscription('companyPremium', 'year')"> Подключить на год </button>
+        </div>
+      </div>
+    } @else {
+        <div class="flex flex-nowrap gap-6">
+          <div class="rounded-xl p-4 border border-white border-solid w-[300px] overflow-hidden">
+            <div class="text-2xl border-b border-solid border-white text-center leading-10 mb-2 py-4 -my-4 -mx-4 bg-gradient-to-r from-cyan-500 to-blue-500"> Базовая </div>
+            <p class="text-base">
+              Месячная подписка за 300 рублей или годовая за 3000 рублей (2 месяца бесплатно)
+              <br>
+              Доступно 5 стаканов
+            </p>
+            <button tuiButton size="m" class="w-full mt-2" [showLoader]="loading === 'privateBaseMonth'" (click)="setSubscription('privateBase', 'month')"> Подключить на месяц </button>
+            <button tuiButton size="m" class="w-full mt-2" [showLoader]="loading === 'privateBaseYear'" (click)="setSubscription('privateBase', 'year')"> Подключить на год </button>
+          </div>
+          <div class="rounded-xl p-4 border border-white border-solid w-[300px] overflow-hidden">
+            <div class="text-2xl border-b border-solid border-white text-center leading-10 mb-2 py-4 -my-4 -mx-4 bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%"> Студенческая </div>
+            <p class="text-base">
+              Месячная подписка за 200 рублей, доступна при предъявлении студенческого билета
+              <br>
+              Доступно 3 стакана
+            </p>
+            <button tuiButton size="m" class="w-full mt-2" [showLoader]="loading === 'privateStudentMonth'" (click)="setSubscription('privateStudent', 'month')"> Подключить на месяц </button>
+            <button tuiButton size="m" class="w-full mt-2" [showLoader]="loading === 'privateStudentYear'" (click)="setSubscription('privateStudent', 'year')"> Подключить на год </button>
+          </div>
+        </div>
+    }
+  }
+</div>
